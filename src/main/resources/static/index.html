@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    <script src="index.js"></script>
+    <title>Market</title>
+</head>
+<body>
+<div class="container" ng-controller="IndexController">
+    <H1>Market</H1>
+    <table class="table table-hover">
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Cost</th>
+            <th>Actions</th>
+        </tr>
+        <tr ng-repeat="p in productsList">
+            <td>{{p.id}}</td>
+            <td>{{p.title}}</td>
+            <td>{{p.cost}}</td>
+            <td>
+                <button type="button" class="btn btn-info" ng-click="addToCart(p.id)">Add</button>
+            </td>
+        </tr>
+    </table>
+    <h3>Cart</h3>
+    <table class="table table-hover">
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Cost</th>
+            <th>Count</th>
+            <th>Total</th>
+            <th>Action</th>
+        </tr>
+        <tr ng-repeat="c in cart.list">
+            <td>{{c.id}}</td>
+            <td>{{c.title}}</td>
+            <td>{{c.cost}}</td>
+            <td>{{c.count}}</td>
+            <td>{{c.total}}</td>
+            <td><button type="button" class="btn btn-danger" ng-click="deleteFromCart(c.id)">Delete</button></td>
+        </tr>
+    </table>
+    <input readonly ng-value="cart.total">
+</div>
+
+</body>
+</html>
