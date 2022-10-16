@@ -1,9 +1,8 @@
 package ru.lapshina.eshop.service;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.lapshina.eshop.dto.Cart;
+import ru.lapshina.eshop.model.Cart;
 import ru.lapshina.eshop.entity.Product;
 import ru.lapshina.eshop.exception.ItemNotFound;
 
@@ -30,7 +29,10 @@ public class CartService {
     }
 
     public void remove(Long id) {
-        Product p = productService.findById(id).orElseThrow(() -> new ItemNotFound("Product not found"));
-        cart.remove(p);
+        cart.remove(id);
+    }
+
+    public void clear(){
+        cart.clear();
     }
 }

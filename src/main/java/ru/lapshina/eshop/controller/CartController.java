@@ -2,7 +2,7 @@ package ru.lapshina.eshop.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import ru.lapshina.eshop.dto.Cart;
+import ru.lapshina.eshop.model.Cart;
 import ru.lapshina.eshop.service.CartService;
 
 @RestController
@@ -21,6 +21,10 @@ public class CartController {
         return cartService.getCart();
     }
 
+    @GetMapping("/clear")
+    public void clear(){
+        cartService.clear();
+    }
     @GetMapping("/delete/{id}")
     public void removeFromCart(@PathVariable Long id) {
         cartService.remove(id);

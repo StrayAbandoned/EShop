@@ -1,12 +1,9 @@
 package ru.lapshina.eshop.controller;
 
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.lapshina.eshop.dto.ProductDto;
 import ru.lapshina.eshop.entity.Product;
-import ru.lapshina.eshop.exception.AppException;
 import ru.lapshina.eshop.exception.ItemNotFound;
 import ru.lapshina.eshop.service.ProductService;
 
