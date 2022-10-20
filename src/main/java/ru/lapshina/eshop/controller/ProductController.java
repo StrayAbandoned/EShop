@@ -2,6 +2,7 @@ package ru.lapshina.eshop.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import ru.lapshina.eshop.converter.ProductConverter;
 import ru.lapshina.eshop.dto.ProductDto;
 import ru.lapshina.eshop.entity.Product;
 import ru.lapshina.eshop.exception.ItemNotFound;
@@ -15,16 +16,16 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class ProductController {
     private final ProductService productService;
-
+    private final ProductConverter productConverter;
     @GetMapping
     public List<ProductDto> findAllProducts() {
-        return productService.findAll().stream().map(p -> new ProductDto(p.getId(), p.getTitle(), p.getCost())).collect(Collectors.toList());
+        return productService.findAll().stream().map(productConverter::entityToDto).toList();
     }
 
     @GetMapping("/{id}")
     public ProductDto findProductById(@PathVariable Long id) {
         Product p = productService.findById(id).orElseThrow(() -> new ItemNotFound("Product not found"));
-        return new ProductDto(p.getId(), p.getTitle(), p.getCost());
+        return productConverter.entityToDto(p);
     }
 
 
