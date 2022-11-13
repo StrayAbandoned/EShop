@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Data
@@ -12,14 +13,14 @@ import java.util.Objects;
 public class CartItem {
     private Long id;
     private String title;
-    private Integer cost;
+    private BigDecimal cost;
     private int count;
-    private int total;
+    private BigDecimal total;
 
 
     public void changeCount(int diff) {
         count += diff;
-        total = cost * count;
+        total = cost.multiply(BigDecimal.valueOf(count));
     }
 
 }

@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.stereotype.Component;
 import ru.lapshina.api.ProductDto;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
 public class Cart {
 
     private List<CartItem> list;
-    private int total;
+    private BigDecimal total;
 
     public Cart() {
         this.list = new ArrayList<>();
@@ -37,9 +38,9 @@ public class Cart {
     }
 
     private void countTotal() {
-        total = 0;
+        total = BigDecimal.valueOf(0);
         for (CartItem c : list) {
-            total += c.getTotal();
+            total = total.add(c.getTotal());
         }
     }
 
@@ -51,6 +52,6 @@ public class Cart {
 
     public void clear() {
         list.clear();
-        total = 0;
+        total = BigDecimal.valueOf(0);
     }
 }

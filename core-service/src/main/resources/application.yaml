@@ -1,7 +1,7 @@
 server:
   port: 8082
   servlet:
-    context-path: /market
+    context-path: /market-core
 
 spring:
   datasource:
@@ -19,6 +19,9 @@ spring:
       enabled: true
       settings:
         web-allow-others: false
-jwt:
-  secret: dfgkdfg9drjte4683**&t&I
-  lifetime: 50000000
+integrations:
+  cart-service:
+    url: http://localhost:8083/market-cart
+    read-timeout: 10000
+    write-timeout: 5000
+    connect-timeout: 5000

@@ -6,6 +6,8 @@
     <modules>
         <module>cart-service</module>
         <module>core-service</module>
+        <module>front-service</module>
+        <module>auth-service</module>
     </modules>
 
     <groupId>ru.lapshina</groupId>

@@ -1,12 +1,14 @@
 package ru.lapshina.api;
 
 
+import java.math.BigDecimal;
+
 public class CartItemDto {
     private Long id;
     private String title;
-    private Integer cost;
+    private BigDecimal cost;
     private int count;
-    private int total;
+    private BigDecimal total;
 
 
     public Long getId() {
@@ -25,11 +27,11 @@ public class CartItemDto {
         this.title = title;
     }
 
-    public Integer getCost() {
+    public BigDecimal getCost() {
         return cost;
     }
 
-    public void setCost(Integer cost) {
+    public void setCost(BigDecimal cost) {
         this.cost = cost;
     }
 
@@ -41,11 +43,11 @@ public class CartItemDto {
         this.count = count;
     }
 
-    public int getTotal() {
+    public BigDecimal getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
+    public void setTotal(BigDecimal total) {
         this.total = total;
     }
 

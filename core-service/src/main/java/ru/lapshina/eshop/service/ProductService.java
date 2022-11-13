@@ -2,10 +2,12 @@ package ru.lapshina.eshop.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.lapshina.api.ProductDto;
 import ru.lapshina.eshop.entity.Product;
 import ru.lapshina.eshop.repository.ProductRepository;
 import ru.lapshina.eshop.soap.Productxml;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -38,5 +40,16 @@ public class ProductService {
 
     public void deleteById(Long id) {
         repository.deleteById(id);
+    }
+
+    public List<Product> findProductByMin(BigDecimal min) {
+        return repository.findProductsByCostGreaterThanEqual(min);
+    }
+    public List<Product> findProductByMax(BigDecimal max) {
+        return repository.findProductsByCostLessThanEqual(max);
+    }
+
+    public List<Product> findBetween(BigDecimal minCost, BigDecimal maxCost) {
+        return repository.findProductsByCostGreaterThanEqualAndCostLessThanEqual(minCost, maxCost);
     }
 }

@@ -1,18 +1,29 @@
 package ru.lapshina.eshop.integration;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 import ru.lapshina.api.CartDto;
+import ru.lapshina.api.ItemNotFound;
 
-import java.util.Optional;
 
 @Component
 @AllArgsConstructor
 public class CartServiceIntegration {
-    private final RestTemplate restTemplate;
+    private final WebClient productServiceWebClient;
 
-    public Optional<CartDto> getCart() {
-        return Optional.ofNullable(restTemplate.getForObject("http://localhost:8083/market-cart/api/v1/cart", CartDto.class));
+    public CartDto getCart() {
+        return productServiceWebClient.get()
+                .uri("/api/v1/cart")
+                .retrieve()
+                .onStatus(httpStatus -> httpStatus.value()== HttpStatus.NOT_FOUND.value(),
+                        clientResponse -> Mono.error(new ItemNotFound("Product not found")))
+                .bodyToMono(CartDto.class)
+                .block();
+
     }
+
+
 }

@@ -1,11 +1,12 @@
 package ru.lapshina.api;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class CartDto {
 
     private List<CartItemDto> list;
-    private int total;
+    private BigDecimal total;
 
 
     public List<CartItemDto> getList() {
@@ -16,11 +17,11 @@ public class CartDto {
         this.list = list;
     }
 
-    public int getTotal() {
+    public BigDecimal getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
+    public void setTotal(BigDecimal total) {
         this.total = total;
     }
 }

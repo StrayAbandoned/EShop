@@ -10,7 +10,6 @@ import ru.lapshina.carts.sevice.CartService;
 @RestController
 @RequestMapping("/api/v1/cart")
 @AllArgsConstructor
-@CrossOrigin("*")
 public class CartController {
     private final CartService cartService;
     private final CartConverter cartConverter;

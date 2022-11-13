@@ -26,7 +26,7 @@ public class CartService {
     }
 
     public void add(Long id) {
-        ProductDto p = productServiceIntegration.getProductByID(id).orElseThrow(() -> new ItemNotFound("Product not found"));
+        ProductDto p = productServiceIntegration.getProductByID(id);
         cart.add(p);
     }
 

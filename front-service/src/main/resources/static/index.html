@@ -47,6 +47,21 @@
         </div>
     </nav>
     <H1>Market</H1>
+    <div class="col-12 mt-3">
+        <form class="form-inline">
+            <div class="form-group mb-2 mr-2">
+                <label for="minCost" class="sr-only">Min cost</label>
+                <input type="number" class="form-control" id="minCost"
+                       name="minCost" [(ngModel)]="minCost" placeholder="minCost">
+            </div>
+            <div class="form-group mb-2 mr-2">
+                <label for="maxCost" class="sr-only">Max cost</label>
+                <input type="number" class="form-control" id="maxCost"
+                       name="maxCost" [(ngModel)]="maxCost" placeholder="maxCost">
+            </div>
+            <button type="submit" class="btn btn-primary mb-2" ng-click="setMinAndMax(minCost, maxCost)">Apply</button>
+        </form>
+    </div>
     <table class="table table-hover">
         <tr>
             <th>Id</th>
