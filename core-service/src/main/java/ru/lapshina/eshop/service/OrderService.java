@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import ru.lapshina.api.CartDto;
-import ru.lapshina.api.ItemNotFound;
 import ru.lapshina.eshop.entity.Order;
 import ru.lapshina.eshop.entity.OrderItem;
 import ru.lapshina.eshop.integration.CartServiceIntegration;
@@ -26,7 +25,7 @@ public class OrderService {
 
 
     @Transactional
-    public void createOrder(String username) {
+    public Order createOrder(String username) {
         CartDto cart = cartServiceIntegration.getCart();
         Order order = new Order();
         List<OrderItem> orderItem = cart.getList().stream().map(cartItem -> new OrderItem(
@@ -39,6 +38,7 @@ public class OrderService {
         order.setItems(orderItem);
         order.setTotalPrice(countPrice(orderItem));
         repository.save(order);
+        return order;
 
     }
 

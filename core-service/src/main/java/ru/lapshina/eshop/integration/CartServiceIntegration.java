@@ -12,7 +12,9 @@ import ru.lapshina.api.ItemNotFound;
 @Component
 @AllArgsConstructor
 public class CartServiceIntegration {
+
     private final WebClient productServiceWebClient;
+
 
     public CartDto getCart() {
         return productServiceWebClient.get()
