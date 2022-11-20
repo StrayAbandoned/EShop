@@ -1,11 +1,15 @@
 package ru.lapshina.eshop.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.lapshina.api.ProductDto;
 import ru.lapshina.eshop.entity.Product;
 import ru.lapshina.eshop.repository.ProductRepository;
 import ru.lapshina.eshop.soap.Productxml;
+import ru.lapshina.eshop.specification.ProductSpecification;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -26,8 +30,8 @@ public class ProductService {
         return productxml;
     };
 
-    public List<Product> findAll() {
-        return repository.findAll();
+    public Page<Product> findAll(Specification<Product> specification, int page) {
+        return repository.findAll(specification, PageRequest.of(page, 5));
     }
 
     public List<Productxml> findAllXml() {
@@ -42,14 +46,18 @@ public class ProductService {
         repository.deleteById(id);
     }
 
-    public List<Product> findProductByMin(BigDecimal min) {
-        return repository.findProductsByCostGreaterThanEqual(min);
-    }
-    public List<Product> findProductByMax(BigDecimal max) {
-        return repository.findProductsByCostLessThanEqual(max);
-    }
 
-    public List<Product> findBetween(BigDecimal minCost, BigDecimal maxCost) {
-        return repository.findProductsByCostGreaterThanEqualAndCostLessThanEqual(minCost, maxCost);
+    public Specification<Product> createSpec(Long min, Long max, String title){
+        Specification<Product> specification = Specification.where(null);
+        if(min!=null) {
+            specification = specification.and(ProductSpecification.costGreaterOrEqualsThan(BigDecimal.valueOf(min)));
+        }
+        if(max!=null) {
+            specification = specification.and(ProductSpecification.costLessOrEqualsThan(BigDecimal.valueOf(max)));
+        }
+        if(min!=null) {
+            specification = specification.and(ProductSpecification.titleLike(title));
+        }
+        return specification;
     }
 }

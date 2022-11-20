@@ -9,6 +9,9 @@ CREATE TABLE products (
 INSERT INTO products (title, cost) values
     ('Milk', 100.50),
     ('Bread', 50.12),
+    ('Orange', 30.12),
+    ('Kiwi', 107.20),
+    ('Potato', 63.10),
     ('Orange', 70.33);
 
 

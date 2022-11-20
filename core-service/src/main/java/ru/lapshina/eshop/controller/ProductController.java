@@ -1,6 +1,7 @@
 package ru.lapshina.eshop.controller;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.*;
 import ru.lapshina.api.ItemNotFound;
 import ru.lapshina.api.ProductDto;
@@ -20,26 +21,14 @@ public class ProductController {
     private final ProductConverter productConverter;
 
     @GetMapping
-    public List<ProductDto> findAllProducts(@RequestParam(required = false) Long minCost, @RequestParam(required = false) Long maxCost) {
-//        if (minCost == null && maxCost == null) {
-//            return productService.findAll().stream().map(productConverter::entityToDto).collect(Collectors.toList());
-//
-//        }
-        if (minCost!=null && maxCost == null) {
-            System.out.println(1);
-            return productService.findProductByMin(BigDecimal.valueOf(minCost)).stream().map(productConverter::entityToDto).collect(Collectors.toList());
+    public List<ProductDto> findAllProducts(@RequestParam(required = false) Long minCost, @RequestParam(required = false) Long maxCost,@RequestParam(required = false) String title, @RequestParam(defaultValue = "1", name = "p") Integer page) {
+        if (page < 1) {
+            page =1;
+        }
+        Specification<Product> specification = productService.createSpec(minCost,maxCost,title);
 
-        }
-        if (minCost != null && maxCost != null) {
-            System.out.println(3);
-            return productService.findBetween(BigDecimal.valueOf(minCost), BigDecimal.valueOf(maxCost)).stream().map(productConverter::entityToDto).collect(Collectors.toList());
-        }
-        if (minCost == null && maxCost != null) {
-            System.out.println(2);
-            return productService.findProductByMax(BigDecimal.valueOf(maxCost)).stream().map(productConverter::entityToDto).collect(Collectors.toList());
-        }
 
-        return productService.findAll().stream().map(productConverter::entityToDto).collect(Collectors.toList());
+        return productService.findAll(specification, page-1).map(productConverter::entityToDto).getContent();
     }
 
     @GetMapping("/{id}")
@@ -47,7 +36,6 @@ public class ProductController {
         Product p = productService.findById(id).orElseThrow(() -> new ItemNotFound("Product not found"));
         return productConverter.entityToDto(p);
     }
-
 
 
     @DeleteMapping("/{id}")

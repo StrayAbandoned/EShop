@@ -7,23 +7,26 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.min.js"></script>
-    <script src="index.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular-route.min.js"></script>
     <title>Market</title>
 </head>
 <body>
-<div class="container" ng-controller="IndexController">
+<div class="container" ng-controller="indexController">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <!--                <li class="nav-item">-->
-                <!--                    <a class="nav-link" href="#!/">Market</a>-->
-                <!--                </li>-->
-                <!--                <li class="nav-item">-->
-                <!--                    <a class="nav-link" href="#!/store">Catalog</a>-->
-                <!--                </li>-->
-                <!--                <li class="nav-item">-->
-                <!--                    <a class="nav-link" href="#!/orders">Orders</a>-->
-                <!--                </li>-->
+                <li class="nav-item">
+                    <a class="nav-link" href="#!/">Market</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#!/store">Store</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#!/cart">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#!/orders">Orders</a>
+                </li>
                 <li class="nav-item" ng-show="!isLoggedIn()">
                     <form class="align-middle" ng-submit="tryToAuth()">
                         <div class="input-group input-group-sm" style="...">
@@ -46,62 +49,13 @@
             </ul>
         </div>
     </nav>
-    <H1>Market</H1>
-    <div class="col-12 mt-3">
-        <form class="form-inline">
-            <div class="form-group mb-2 mr-2">
-                <label for="minCost" class="sr-only">Min cost</label>
-                <input type="number" class="form-control" id="minCost"
-                       name="minCost" [(ngModel)]="minCost" placeholder="minCost">
-            </div>
-            <div class="form-group mb-2 mr-2">
-                <label for="maxCost" class="sr-only">Max cost</label>
-                <input type="number" class="form-control" id="maxCost"
-                       name="maxCost" [(ngModel)]="maxCost" placeholder="maxCost">
-            </div>
-            <button type="submit" class="btn btn-primary mb-2" ng-click="setMinAndMax(minCost, maxCost)">Apply</button>
-        </form>
-    </div>
-    <table class="table table-hover">
-        <tr>
-            <th>Id</th>
-            <th>Title</th>
-            <th>Cost</th>
-            <th>Actions</th>
-        </tr>
-        <tr ng-repeat="p in productsList">
-            <td>{{p.id}}</td>
-            <td>{{p.title}}</td>
-            <td>{{p.cost}}</td>
-            <td>
-                <button type="button" class="btn btn-info" ng-click="addToCart(p.id)">Add</button>
-            </td>
-        </tr>
-    </table>
-    <h3>Cart</h3>
-    <table class="table table-hover">
-        <tr>
-            <th>Id</th>
-            <th>Title</th>
-            <th>Cost</th>
-            <th>Count</th>
-            <th>Total</th>
-            <th>Action</th>
-        </tr>
-        <tr ng-repeat="c in cart.list">
-            <td>{{c.id}}</td>
-            <td>{{c.title}}</td>
-            <td>{{c.cost}}</td>
-            <td>{{c.count}}</td>
-            <td>{{c.total}}</td>
-            <td>
-                <button type="button" class="btn btn-danger" ng-click="deleteFromCart(c.id)">Delete</button>
-            </td>
-        </tr>
-    </table>
-    <input readonly ng-value="cart.total">
-    <button type="button" class="btn btn-danger" ng-click="clearCart()">Clear</button>
-    <button type="button" class="btn btn-danger" ng-show="isLoggedIn()" ng-click="addOrder()">Order</button>
+    <ng-view></ng-view>
+    <script src="index.js"></script>
+    <script src="/store/store.js"></script>
+    <script src="/cart/cart.js"></script>
+    <script src="/welcome/welcome.js"></script>
+
+
 </div>
 
 </body>
