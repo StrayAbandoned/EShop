@@ -17,7 +17,7 @@ angular.module('app').controller('storeController', function ($scope, $http, $lo
     // }
 
     $scope.addToCart = function (productId){
-        $http.get('http://localhost:5555/cart/api/v1/cart/add/'+ productId).then(function (response){
+        $http.get('http://localhost:5555/cart/api/v1/cart/'+$localStorage.springGuestCartId+'/add/'+ productId).then(function (response){
         })
     }
 

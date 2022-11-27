@@ -26,7 +26,7 @@ public class OrderService {
 
     @Transactional
     public Order createOrder(String username) {
-        CartDto cart = cartServiceIntegration.getCart();
+        CartDto cart = cartServiceIntegration.getCart(username);
         Order order = new Order();
         List<OrderItem> orderItem = cart.getList().stream().map(cartItem -> new OrderItem(
                 productService.findById(cartItem.getId()).get(),

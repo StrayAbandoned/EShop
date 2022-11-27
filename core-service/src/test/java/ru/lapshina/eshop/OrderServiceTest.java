@@ -46,7 +46,7 @@ public class OrderServiceTest {
         items.add(cartItemDto);
         cartDto.setList(items);
         cartDto.setTotal(BigDecimal.valueOf(41));
-        Mockito.doReturn(cartDto).when(cartServiceIntegration).getCart();
+        Mockito.doReturn(cartDto).when(cartServiceIntegration).getCart("Anastasia");
         Product product = new Product(12L, "Juice", BigDecimal.valueOf(20.5));
         Mockito.doReturn(Optional.of(product)).when(productService).findById(12L);
         Order order = orderService.createOrder("Anastasia");

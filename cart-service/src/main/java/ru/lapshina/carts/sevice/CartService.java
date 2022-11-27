@@ -9,32 +9,37 @@ import ru.lapshina.carts.model.Cart;
 
 
 import javax.annotation.PostConstruct;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
 public class CartService {
     private final ProductServiceIntegration productServiceIntegration;
-    private Cart cart;
+    private Map<String, Cart> carts;
 
     @PostConstruct
     public void init() {
-        cart = new Cart();
+        carts = new HashMap<>();
     }
 
-    public Cart getCart() {
-        return this.cart;
+    public Cart getCart(String cartId) {
+        if (!carts.containsKey(cartId)) {
+            carts.put(cartId, new Cart());
+        }
+        return carts.get(cartId);
     }
 
-    public void add(Long id) {
+    public void add(String cartId, Long id) {
         ProductDto p = productServiceIntegration.getProductByID(id);
-        cart.add(p);
+        getCart(cartId).add(p);
     }
 
-    public void remove(Long id) {
-        cart.remove(id);
+    public void remove(String cartId, Long id) {
+        getCart(cartId).remove(id);
     }
 
-    public void clear(){
-        cart.clear();
+    public void clear(String cartId) {
+        getCart(cartId).clear();
     }
 }
