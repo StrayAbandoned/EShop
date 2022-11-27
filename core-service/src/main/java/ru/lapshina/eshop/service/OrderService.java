@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import ru.lapshina.api.CartDto;
+import ru.lapshina.api.OrderDto;
 import ru.lapshina.eshop.entity.Order;
 import ru.lapshina.eshop.entity.OrderItem;
 import ru.lapshina.eshop.integration.CartServiceIntegration;
@@ -50,4 +51,7 @@ public class OrderService {
         return total;
     }
 
+    public List<Order> getOrders(String username) {
+        return repository.findByUsername(username);
+    }
 }

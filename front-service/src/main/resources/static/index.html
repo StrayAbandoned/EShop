@@ -24,7 +24,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#!/cart">Cart</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" ng-show="isLoggedIn()">
                     <a class="nav-link" href="#!/orders">Orders</a>
                 </li>
                 <li class="nav-item" ng-show="!isLoggedIn()">
@@ -41,6 +41,9 @@
 
                     </form>
                 </li>
+                <li class="nav-item" ng-show="!isLoggedIn()">
+                    <a class="nav-link" href="#!/registration">Registration</a>
+                </li>
                 <li class="nav-item" ng-show="isLoggedIn()" style="...">
                     <button class="btn btn-outline-secondary btn-sm" ng-click="tryToLogout()" style="..." type="submit">
                         Log-out
@@ -53,7 +56,9 @@
     <script src="index.js"></script>
     <script src="/store/store.js"></script>
     <script src="/cart/cart.js"></script>
+    <script src="/orders/orders.js"></script>
     <script src="/welcome/welcome.js"></script>
+    <script src="/registration/registration.js"></script>
 
 
 </div>

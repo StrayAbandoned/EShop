@@ -19,15 +19,9 @@ angular.module('app').controller('cartController', function ($scope, $http, $loc
         })
     }
 
-    $scope.createOrder = function () {
-        $http.post('http://localhost:5555/core/api/v1/orders')
-            .then(function (response) {
-                $scope.loadCart();
-            });
-    }
 
     $scope.addOrder = function (){
-        $http.get('http://localhost:5555/core/api/v1/order').then(function (response){
+        $http.post('http://localhost:5555/core/api/v1/orders').then(function (response){
             $scope.clearCart();
         })
     }

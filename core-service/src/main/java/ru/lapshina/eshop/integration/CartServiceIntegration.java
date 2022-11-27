@@ -18,11 +18,11 @@ public class CartServiceIntegration {
 
     public CartDto getCart(String username) {
         return productServiceWebClient.get()
-                .uri("/api/v1/cart")
+                .uri("/api/v1/cart/"+username)
                 .header("username", username)
                 .retrieve()
                 .onStatus(httpStatus -> httpStatus.value()== HttpStatus.NOT_FOUND.value(),
-                        clientResponse -> Mono.error(new ItemNotFound("Product not found")))
+                        clientResponse -> Mono.error(new ItemNotFound("Can't make order")))
                 .bodyToMono(CartDto.class)
                 .block();
 
