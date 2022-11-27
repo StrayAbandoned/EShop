@@ -1,0 +1,21 @@
+<div>
+    <p></p>
+    <h3>Список товаров</h3>
+    <p></p>
+    <table class="table table-hover">
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Cost</th>
+            <th>Actions</th>
+        </tr>
+        <tr ng-repeat="p in productsList">
+            <td>{{p.id}}</td>
+            <td>{{p.title}}</td>
+            <td>{{p.cost}}</td>
+            <td>
+                <button type="button" class="btn btn-info" ng-click="addToCart(p.id)">Add</button>
+            </td>
+        </tr>
+    </table>
+</div>
