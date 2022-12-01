@@ -1,0 +1,19 @@
+<div>
+    <p></p>
+    <h3>Регистрация</h3>
+    <p></p>
+
+    <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm1">Username</span>
+        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" ng-model="reguser.username">
+    </div>
+    <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm2">Password</span>
+        <input type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" ng-model="reguser.password">
+    </div>
+    <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm3">ConfirmPassword</span>
+        <input type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" ng-model="reguser.confirmPassword">
+    </div>
+    <button type="submit" class="btn btn-danger" ng-click="registrate()">Register</button>
+</div>
